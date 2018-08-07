@@ -20,28 +20,16 @@ updateQuery = (query) => {
           else { 
             this.setState({bookQuery: bookQuery})
             }
-          
-        // if (response.length) {
-        //   bookQuery = bookQuery.map(b => {
-        //     const index = this.state.books.findIndex(c => c.id === b.id)
-        //     if( index >= 0 ) {
-        //       return this.state.books[index]
-        //     } else {
-        //       return b
-        //     }
+        
         })
         
-        // this.setState({bookQuery})
-      
+             
      
     }
     else {
         this.setState({bookQuery: [] })
       }
-    // else {
-    //   this.setState({bookQuery})
-    // }
-  }
+}
 
     render() 
     {
