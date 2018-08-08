@@ -8,33 +8,24 @@ class Search extends Component {
         query: '',
         bookQuery: []
     }
-//credit: https://github.com/kedevked
-updateQuery = (query) => {
-    this.setState({query:query})
-    let bookQuery = []
-    if (query) {
-        BooksAPI.search(query).then((result) => {
-            if (result.length) {
-                bookQuery = result.map((book) => {
-                    let index = this.props.books.findIndex(c => c.id === book.id)
-                    if (index >= 0) {
-                        return this.props.books[index]
-                    }
-                    else {
-                        return book
-                    }
-                })
+    // try not to use code from elsewhere
+    search(query) {
+        const search = this.currentSearch = BooksAPI.search(query).then((result) => {
+            if(this.currentSearch === search) {
+                this.setState({ bookQuery: result })
             }
-            
-            this.setState({bookQuery})
-            
         })
     }
-    else 
-    {
-        this.setState({bookQuery})
+    updateQuery = query => {
+        this.currentSearch = null // only the latest keypress will execute search
+        if(query) {
+            this.search(query)
+        } 
+        this.setState({ 
+            bookQuery: [],
+            query
+        })
     }
-}
 
     render() 
     {
