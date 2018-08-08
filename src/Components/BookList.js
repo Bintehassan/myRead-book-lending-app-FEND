@@ -3,9 +3,7 @@ import {Link} from 'react-router-dom'
 import Book from './Book'
 
 class BookList extends Component {
-  // updateBook = (book, shelf) => {
-  //   this.props.onUpdateShelf(book, shelf) }
-    
+
   render () {
     return (
       <div className="list-books">

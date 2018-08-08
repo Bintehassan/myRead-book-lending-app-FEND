@@ -17,34 +17,30 @@ class BooksApp extends Component {
    })
  }
  
+ //update shelves of desired books
  updateShelf = (book, shelf) => {
-  //  BooksAPI.update(book, shelf);
-  //  BooksAPI.getAll().then((books) => {
-  //   this.setState({books})
-  // })
   BooksAPI.update(book, shelf).then(() => {
     book.shelf = shelf;
     this.setState( state => ({books: state.books.filter(b => b.id !== book.id).concat([book])}))
   })
 }
  
-
   render() {
-    // const {query} = this.state
+    
     return (
       <div className="app">
         <Route exact path="/" render={() => (
           <BookList 
             books={this.state.books}
             updateShelf = {this.updateShelf}
-            // updateShelf={(book, shelf) => this.updateShelf(book, shelf)}
-            />)}/>
+          />)}
+        />
         <Route exact path="/search" render={() => (
           <Search 
             updateShelf = {this.updateShelf}
             books={this.state.books}
-            // updateShelf={(book, shelf) => this.updateShelf(book, shelf)}
-            />)}/>
+          />)}
+        />
 
       </div>
     )

@@ -8,33 +8,36 @@ class Search extends Component {
         query: '',
         bookQuery: []
     }
-
+//credit: https://github.com/kedevked
 updateQuery = (query) => {
-    this.setState({query: query})
-    // let bookQuery = []
+    this.setState({query:query})
+    let bookQuery = []
     if (query) {
-      BooksAPI.search(query).then((bookQuery) => {
-          if(bookQuery.error) {
-            this.setState({bookQuery: [] })
+        BooksAPI.search(query).then((result) => {
+            if (result.length) {
+                bookQuery = result.map((book) => {
+                    let index = this.props.books.findIndex(c => c.id === book.id)
+                    if (index >= 0) {
+                        return this.props.books[index]
+                    }
+                    else {
+                        return book
+                    }
+                })
             }
-          else { 
-            this.setState({bookQuery: bookQuery})
-            }
-        
+            
+            this.setState({bookQuery})
+            
         })
-        
-             
-     
     }
-    else {
-        this.setState({bookQuery: [] })
-      }
+    else 
+    {
+        this.setState({bookQuery})
+    }
 }
 
     render() 
     {
-        const {query} = this.state;
-        // const {updateShelf} = this.props;
         return ( 
             <div className = "search-books">
                 <div className = "search-books-bar" >
@@ -43,7 +46,7 @@ updateQuery = (query) => {
                         <input 
                             type = "text"
                             placeholder = "Search by title or author"
-                            value = {query}
+                            value = {this.state.query || ""}
                             onChange = {(event) => this.updateQuery(event.target.value)}/>
                     </div> 
                 </div> 
@@ -61,12 +64,6 @@ updateQuery = (query) => {
                                 book = {bookQuery}
                                 updateShelf = {this.props.updateShelf}
                                 currentShelf = {shelf}
-                                // id = {book.id}
-                                // shelf = {book.shelf}
-                                // authors = {book.authors}
-                                // title = {book.title}
-                                // imageLinks = {book.imageLinks}
-                                // updateShelf = {updateShelf}
                                 />
                             </li>
                             );
