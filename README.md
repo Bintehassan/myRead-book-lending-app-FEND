@@ -19,10 +19,6 @@ Which will open a new browser window pointed to [localhost:3000](http://localhos
 ### Dependencies
 npm and node
 
-### Built With
-* [npm](https://www.npmjs.com/)
-* [Node](https://nodejs.org/en/)
-
 ## Credits
 * Maeva NGUYEN ANH PHUONG (For a brilliant walkthrough)
 * kedevked for your webinar and a concise coding approach https://github.com/kedevked
